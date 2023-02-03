@@ -1,0 +1,1 @@
+/Users/bogachanyigitbasi/Desktop/CCD/InHouse_TUTs/Bogac'\ concordium-client/fungible/fungible/target/concordium/wasm32-unknown-unknown/release/fungible.wasm: /Users/bogachanyigitbasi/Desktop/CCD/InHouse_TUTs/Bogac'\ concordium-client/fungible/fungible/src/lib.rs
