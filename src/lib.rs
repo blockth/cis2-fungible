@@ -253,6 +253,14 @@ impl<S: HasStateApi> State<S> {
         amount: ContractTokenAmount,
         owner: &Address,
     ) -> ContractResult<ContractTokenAmount> {
+        ensure!(
+            self.contains_token(&token_id),
+            ContractError::InvalidTokenId
+        );
+        if amount == 0u64.into() {
+            return Ok(amount);
+        }
+
         match self.state.get_mut(owner) {
             Some(address_state) => match address_state.balances.get_mut(token_id) {
                 Some(mut b) => {
@@ -589,8 +597,9 @@ fn contract_mint<S: HasStateApi>(
     Ok(())
 }
 
+#[derive(Serial, Deserial, SchemaType)]
 struct BurnParams {
-    account: Address,
+    // account: Address,
     token_id: ContractTokenId,
     amount: ContractTokenAmount,
 }
@@ -609,24 +618,28 @@ fn contract_burn<S: HasStateApi>(
     logger: &mut impl HasLogger,
 ) -> ContractResult<()> {
     // Get the contract owner
-    let owner = ctx.owner();
+    // let owner = ctx.owner();
     // Get the sender of the transaction
     let sender = ctx.sender();
 
-    ensure!(sender.matches_account(&owner), ContractError::Unauthorized);
+    // ensure!(sender.matches_account(&owner), ContractError::Unauthorized);
 
     // Parse the parameter.
-    let params: MintParams = ctx.parameter_cursor().get()?;
+    let params: BurnParams = ctx.parameter_cursor().get()?;
+    let token_id = params.token_id;
+    // let from = params.account;
+    let amount = params.amount;
 
     let (state, builder) = host.state_and_builder();
 
-    let remaining_amount: ContractTokenAmount = state.burn(&token_id, amount, &from)?;
+    // can use the value to store it in the state.
+    let remaining_amount: ContractTokenAmount = state.burn(&token_id, amount, &sender)?;
 
     // log burn event
     logger.log(&Cis2Event::Burn(BurnEvent {
         token_id,
         amount,
-        owner: from,
+        owner: sender,
     }))?;
     Ok(())
 }
