@@ -48,9 +48,6 @@ type ContractTokenId = TokenIdU8;
 /// Contract token amount type.
 type ContractTokenAmount = TokenAmountU64;
 
-/// Contract token maximum supply
-type ContractTokenMaxSupply = TokenAmountU64;
-
 #[derive(Serial, Deserial, SchemaType)]
 struct TokenParams {
     amount: TokenAmountU64,
@@ -65,7 +62,6 @@ struct MintParams {
     owner: Address,
     /// A collection of tokens to mint.
     tokens: collections::BTreeMap<ContractTokenId, (TokenMetadata, TokenParams)>,
-    // max_supply: ContractTokenMaxSupply,
 }
 
 /// The parameter type for the contract function `setImplementors`.
