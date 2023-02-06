@@ -1,0 +1,22 @@
+{
+    "owner": {
+        "Account": [
+            "3AiAikC2v4H3Rv4L58oHvdX5N8LJoarsQwN3G7oNS7BoFsmt7N"
+        ]
+    },
+    "tokens": [
+        [
+            "01",
+            [
+                {
+                    "url": "https://gateway.pinata.cloud/ipfs/QmZBrF6HuoN12HyAznyk7gwFpnefooDbfxq3JeKTWToL1W",
+                    "hash": "c00a140ea66af09c343083c0e7ccc77d5e0670d90014569798801bffad637d15"
+                },
+                {
+                    "amount": "500",
+                    "max_supply": "1000"
+                }
+            ]
+        ]
+    ]
+}
