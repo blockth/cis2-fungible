@@ -2,9 +2,15 @@
 
 cargo concordium build --out dist/fungible/module.wasm.v1 --schema-out dist/fungible/schema.bin
 
+**Schema Embedded to Module** cargo concordium build --schema-embed --out dist/embedded/module.wasm.v1
+
 # Deploy the contract
 
 concordium-client module deploy dist/fungible/module.wasm.v1 --sender YOUR-ACCOUNT --name YOUR-CONTRACT-NAME --grpc-port 10000 --grpc-ip node.testnet.concordium.com
+
+**Embedded Schema**
+
+If you are using schema embedded to module, remove "--schema param" inputs from the commands!
 
 # Initialize the contract
 
